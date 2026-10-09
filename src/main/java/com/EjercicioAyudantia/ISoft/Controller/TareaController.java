@@ -12,7 +12,9 @@ import com.EjercicioAyudantia.ISoft.Service.TareaService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
@@ -40,4 +42,10 @@ public class TareaController {
         TareaModel creada = tareaService.crearTarea(tarea);
         return ResponseEntity.status(HttpStatus.CREATED).body(creada);
     }
+
+    @PutMapping("/{id}/completar")
+    public ResponseEntity<TareaModel> completarTarea(@PathVariable Long id) {
+        return ResponseEntity.ok(tareaService.completarTarea(id));
+    }
 }
+
