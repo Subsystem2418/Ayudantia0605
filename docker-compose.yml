@@ -1,0 +1,12 @@
+services:
+  isoft-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: isoft-app:latest
+    container_name: isoft-app
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    restart: unless-stopped
