@@ -1,6 +1,5 @@
 package com.EjercicioAyudantia.ISoft.Service;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
@@ -47,6 +46,15 @@ public class TareaService {
         public TareaModel crearTarea(TareaModel tarea) {
                 tarea.setId(contadorId.incrementAndGet());
                 tarea.setCompletada(false);
+                return tareaRepository.guardar(tarea);
+        }
+
+        public TareaModel completarTarea(Long id) {
+                TareaModel tarea = tareaRepository.buscarPorId(id);
+                if (tarea == null) {
+                        return null;
+                }
+                tarea.setCompletada(true);
                 return tareaRepository.guardar(tarea);
         }
 }

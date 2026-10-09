@@ -22,4 +22,8 @@ public class TareaRepository {
     tareas.put(tarea.getId(), tarea);
     return tarea;
 }
+
+    public TareaModel buscarPorId(Long id) {
+        return tareas.get(id);
+    }
 }
