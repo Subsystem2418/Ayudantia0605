@@ -1,5 +1,14 @@
 package com.EjercicioAyudantia.ISoft.Controller;
 
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.EjercicioAyudantia.ISoft.Model.TareaModel;
+import com.EjercicioAyudantia.ISoft.Service.TareaService;
 import com.EjercicioAyudantia.ISoft.Model.TareaModel;
 import com.EjercicioAyudantia.ISoft.Service.TareaService;
 import org.springframework.http.HttpStatus;
@@ -19,6 +28,16 @@ public class TareaController {
         this.tareaService = tareaService;
     }
 
+    @GetMapping
+    public List<TareaModel> listar(
+            @RequestParam(name = "prioridad", required = false) String prioridad,
+
+            @RequestParam(name = "titulo", required = false) String titulo,
+
+            @RequestParam(name = "fechaLimite", required = false) String fechaLimite) {
+        return tareaService.listar(prioridad, titulo, fechaLimite);
+    }
+}
     @PostMapping
     public ResponseEntity<TareaModel> crearTarea(@RequestBody TareaModel tarea) {
         TareaModel creada = tareaService.crearTarea(tarea);
