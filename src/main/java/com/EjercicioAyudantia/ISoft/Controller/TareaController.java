@@ -3,6 +3,7 @@ package com.EjercicioAyudantia.ISoft.Controller;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,9 +44,15 @@ public class TareaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(creada);
     }
 
-    @PutMapping("/{id}/completar")
-    public ResponseEntity<TareaModel> completarTarea(@PathVariable Long id) {
-        return ResponseEntity.ok(tareaService.completarTarea(id));
+    @PatchMapping("/{id}/complete")
+    public ResponseEntity<TareaModel> completarTarea(
+            @PathVariable("id") Long id) {
+        TareaModel tarea = tareaService.completarTarea(id);
+
+        if (tarea == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(tarea);
     }
 }
-
