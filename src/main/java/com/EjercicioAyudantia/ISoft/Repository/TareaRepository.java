@@ -17,4 +17,9 @@ public class TareaRepository {
     public List<TareaModel> listar() {
         return new ArrayList<>(tareas.values());
     }
+
+    public TareaModel guardar(TareaModel tarea) {
+    tareas.put(tarea.getId(), tarea);
+    return tarea;
+}
 }

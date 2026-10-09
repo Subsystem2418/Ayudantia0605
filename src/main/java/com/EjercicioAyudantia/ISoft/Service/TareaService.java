@@ -15,7 +15,6 @@ import com.EjercicioAyudantia.ISoft.Repository.TareaRepository;
 public class TareaService {
 
         private final TareaRepository tareaRepository;
-        private final List<TareaModel> tareas = new ArrayList<>();
         private final AtomicLong contadorId = new AtomicLong(0);
 
         public TareaService(TareaRepository tareaRepository) {
@@ -48,7 +47,6 @@ public class TareaService {
         public TareaModel crearTarea(TareaModel tarea) {
                 tarea.setId(contadorId.incrementAndGet());
                 tarea.setCompletada(false);
-                tareas.add(tarea);
-                return tarea;
+                return tareaRepository.guardar(tarea);
         }
 }
